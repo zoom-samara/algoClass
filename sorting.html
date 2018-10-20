@@ -8,15 +8,16 @@
     <title>Sorting</title>
     <script src="sorting-algorithms/bubble.js"></script>
     <script src="sorting-algorithms/merge.js"></script>
+    <script src="sorting-algorithms/quick.js"></script>
 </head>
 <body>
     <script>
-      const unsortedArray = [];
-      const count = 30;
+      let unsortedArray = [];
+      const count = 100;
       for (let i = 0; i < count; i++) {
-        unsortedArray.push(Math.ceil(Math.random() * 100));
+        unsortedArray.push(Math.ceil(Math.random() * 1000));
       }
-      document.write(`Unsorted array: [${unsortedArray.join(', ')}]`)
+      document.write(`Unsorted array: [${unsortedArray.join(', ')}]`);
     </script>
 
 
@@ -39,6 +40,17 @@
     <br>
     <script>
       document.write(`Result: [${mergeResult.result.join(', ')}]`)
+    </script>
+
+
+    <h2>Quick sorting</h2>
+    <script>
+        const quickResult = quickSorting(unsortedArray);
+        document.write(`Time spent: ${quickResult.time}`)
+    </script>
+    <br>
+    <script>
+      document.write(`Result: [${quickResult.result.join(', ')}]`)
     </script>
 
 </body>
