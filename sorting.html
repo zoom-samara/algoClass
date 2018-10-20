@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sorting</title>
     <script src="sorting-algorithms/bubble.js"></script>
+    <script src="sorting-algorithms/merge.js"></script>
 </head>
 <body>
     <script>
@@ -27,6 +28,17 @@
     <br>
     <script>
       document.write(`Result: [${bubbleResult.result.join(', ')}]`)
+    </script>
+
+
+    <h2>Merge sorting</h2>
+    <script>
+        const mergeResult = mergeSorting(unsortedArray);
+        document.write(`Time spent: ${mergeResult.time}`)
+    </script>
+    <br>
+    <script>
+      document.write(`Result: [${mergeResult.result.join(', ')}]`)
     </script>
 
 </body>
