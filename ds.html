@@ -28,6 +28,10 @@
         console.log('Print: ', myLinkedList.print());
         console.log('Remove After: ', myLinkedList.removeAfter(findOne));
         console.log('Print: ', myLinkedList.print());
+        const findTwo = myLinkedList.findNode(2);
+        console.log('Insert After: ', myLinkedList.insertAfter(findTwo, 50));
+        const findFifty = myLinkedList.findNode(50);
+        console.log('Remove After: ', myLinkedList.removeAfter(findFifty));
         console.log('Append To Tail: ', myLinkedList.appendToTail(100));
         console.log('Print: ', myLinkedList.print());
 
