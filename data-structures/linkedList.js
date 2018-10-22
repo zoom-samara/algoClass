@@ -126,11 +126,15 @@ LinkedList.prototype.insertHead = function(value) {
   const newHead = new Node(value);
   newHead.next = this.head;
   this.head = newHead;
+
+  return this.head;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 LinkedList.prototype.removeHead = function() {
-  // implement me...
+  this.head = this.head.next;
+
+  return this;
 };
 
 LinkedList.prototype.findNode = function(value) {
