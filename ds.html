@@ -14,12 +14,20 @@
         const myLinkedList =  new LinkedList(2);
 
         console.log('Print: ', myLinkedList.print());
-        console.log('Insert head: ', myLinkedList.insertHead(3));
-        console.log('Insert head: ', myLinkedList.insertHead(1));
-        console.log('Insert head: ', myLinkedList.insertHead(23));
-        console.log('Insert head: ', myLinkedList.insertHead(311));
+        console.log('Insert Head: ', myLinkedList.insertHead(3));
+        console.log('Insert Head: ', myLinkedList.insertHead(1));
+        console.log('Insert Head: ', myLinkedList.insertHead(23));
+        console.log('Insert Head: ', myLinkedList.insertHead(311));
         console.log('Print: ', myLinkedList.print());
-        console.log('Remove head: ', myLinkedList.removeHead());
+        console.log('Remove Head: ', myLinkedList.removeHead());
+        console.log('Print: ', myLinkedList.print());
+        const findOne = myLinkedList.findNode(1);
+        console.log('Find Node: ', findOne);
+        console.log('Insert After: ', myLinkedList.insertAfter(findOne, 2));
+        console.log('Print: ', myLinkedList.print());
+        console.log('Remove After: ', myLinkedList.removeAfter(findOne));
+        console.log('Print: ', myLinkedList.print());
+        console.log('Append To Tail: ', myLinkedList.appendToTail(100));
         console.log('Print: ', myLinkedList.print());
 
     </script>
