@@ -15,6 +15,9 @@
         const myTree = new BinarySearchTree(50);
         myTree.insert(45);
         myTree.insert(56);
+        myTree.insert(54);
+        myTree.insert(58);
+        myTree.insert(68);
         myTree.insert(41);
         myTree.insert(34);
         myTree.insert(46);
@@ -23,13 +26,14 @@
         console.log(myTree.contains(34));
         console.log(myTree.contains(2));
 
-        console.log('traverseDepthFirst_inOrder')
+        console.log('traverseDepthFirst_inOrder');
         myTree.traverseDepthFirst_inOrder(console.log);
-        console.log('traverseDepthFirst_preOrder')
+        console.log('traverseDepthFirst_preOrder');
         myTree.traverseDepthFirst_preOrder(console.log);
-        console.log('traverseDepthFirst_postOrder')
+        console.log('traverseDepthFirst_postOrder');
         myTree.traverseDepthFirst_postOrder(console.log);
         console.log('checkIfFull', myTree.checkIfFull());
+        console.log('checkIfBalanced', myTree.checkIfBalanced());
 
 
     </script>

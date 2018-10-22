@@ -94,15 +94,14 @@ BinarySearchTree.prototype.traverseDepthFirst_inOrder = function(fn) {
   // Left, SELF, Right
 
   if (!!this.left) {
-    this.left.traverseDepthFirst_inOrder(fn)
+    this.left.traverseDepthFirst_inOrder(fn);
   }
 
   fn(this.value);
 
   if (!!this.right) {
-    this.right.traverseDepthFirst_inOrder(fn)
+    this.right.traverseDepthFirst_inOrder(fn);
   }
-
 };
 // Time complexity: O(n)
 
@@ -112,13 +111,12 @@ BinarySearchTree.prototype.traverseDepthFirst_preOrder = function(fn) {
   fn(this.value);
 
   if (!!this.left) {
-    this.left.traverseDepthFirst_inOrder(fn)
+    this.left.traverseDepthFirst_preOrder(fn);
   }
 
   if (!!this.right) {
-    this.right.traverseDepthFirst_inOrder(fn)
+    this.right.traverseDepthFirst_preOrder(fn);
   }
-
 };
 // Time complexity: O(n)
 
@@ -126,11 +124,11 @@ BinarySearchTree.prototype.traverseDepthFirst_postOrder = function(fn) {
   // Left, Right, SELF
 
   if (!!this.left) {
-    this.left.traverseDepthFirst_inOrder(fn)
+    this.left.traverseDepthFirst_postOrder(fn);
   }
 
   if (!!this.right) {
-    this.right.traverseDepthFirst_inOrder(fn)
+    this.right.traverseDepthFirst_postOrder(fn);
   }
 
   fn(this.value);
@@ -147,6 +145,19 @@ BinarySearchTree.prototype.checkIfFull = function() {
 // Time complexity: O(n)
 
 BinarySearchTree.prototype.checkIfBalanced = function() {
-  // implement me...
+  const heights = [];
+
+  var calcDeep = function (node, height) {
+    if (!node.left && !node.right) return heights.push(height);
+
+    if (!!node.left) calcDeep(node.left, height+1);
+    if (!!node.right) calcDeep(node.right, height+1);
+  };
+
+  calcDeep(this, 1);
+  var min = Math.min(...heights);
+  var max = Math.max(...heights);
+
+  return max - min <= 1;
 };
-// Time complexity:
+// Time complexity: O(n)
