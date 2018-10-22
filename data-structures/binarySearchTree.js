@@ -138,9 +138,13 @@ BinarySearchTree.prototype.traverseDepthFirst_postOrder = function(fn) {
 // Time complexity: O(n)
 
 BinarySearchTree.prototype.checkIfFull = function() {
-  // implement me...
+  if (!!this.left && !!this.right) {
+    return this.left.checkIfFull() && this.right.checkIfFull();
+  }
+
+  return !this.left && !this.right;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.checkIfBalanced = function() {
   // implement me...
