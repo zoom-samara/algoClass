@@ -112,37 +112,17 @@ LinkedList.prototype.print = function() {
 };
 // Time complexity: O(1)
 
-LinkedList.prototype.insertAfter = function(currentNode, value) {
-  let node = this.head;
+LinkedList.prototype.insertAfter = function(node, value) {
   const nextNode = new Node(value);
-
-  while (node) {
-    if (node === currentNode) {
-      nextNode.next = node.next;
-      node.next = nextNode;
-      node = null;
-    } else {
-      node = node.next;
-    }
-  }
-
+  nextNode.next = node.next;
+  node.next = nextNode;
   return this;
 };
 // Time complexity:
 
-LinkedList.prototype.removeAfter = function(currentNode) {
-  let node = this.head;
-  let removedNode = null;
-
-  while (node) {
-    if (node === currentNode) {
-      removedNode = node.next;
-      node.next = node.next.next;
-      node = null;
-    } else {
-      node = node.next;
-    }
-  }
+LinkedList.prototype.removeAfter = function(node) {
+  const removedNode = node.next;
+  node.next = node.next.next;
 
   return removedNode;
 };
