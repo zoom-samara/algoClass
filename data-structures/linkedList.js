@@ -77,7 +77,6 @@ Reimplement stack and queue data structures using linked lists.
 
  */
 
-
 // PART 1
 
 function Node(value) {
@@ -86,19 +85,32 @@ function Node(value) {
 }
 
 function LinkedList(headValue) {
-  if (headValue === undefined) console.log('Must provide value for first node');
+  if (headValue === undefined) console.log("Must provide value for first node");
   this.head = new Node(headValue);
 }
 
 LinkedList.prototype.forEach = function(callback) {
-  // implement me...
+  let node = this.head;
+
+  while (node) {
+    callback(node.value);
+    node = node.next;
+  }
 };
-// Time complexity:
+// Time complexity: O(n)
 
 LinkedList.prototype.print = function() {
-  // implement me...
+  const array = [];
+
+  const callback = function(value) {
+    array.push(value);
+  };
+
+  this.forEach(callback);
+
+  return array.join(", ");
 };
-// Time complexity:
+// Time complexity: O(1)
 
 LinkedList.prototype.insertAfter = function(node, value) {
   // implement me...
@@ -111,13 +123,15 @@ LinkedList.prototype.removeAfter = function(node) {
 // Time complexity:
 
 LinkedList.prototype.insertHead = function(value) {
-  // implement me...
+  const newHead = new Node(value);
+  newHead.next = this.head;
+  this.head = newHead;
 };
 // Time complexity:
 
 LinkedList.prototype.removeHead = function() {
   // implement me...
-}
+};
 
 LinkedList.prototype.findNode = function(value) {
   // implement me...
@@ -128,7 +142,6 @@ LinkedList.prototype.appendToTail = function(value) {
   // implement me...
 };
 // Time complexity:
-
 
 // PART 2:
 
@@ -141,8 +154,6 @@ LinkedList.prototype.removeBefore = function(node) {
   // implement me...
 };
 // Time complexity:
-
-
 
 /*
 *** Exercises:

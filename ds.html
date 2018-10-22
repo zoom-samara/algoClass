@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data Structures</title>
+    <script src="./data-structures/linkedList.js"></script>
+</head>
+<body>
+    <h2>Linked List</h2>
+    <script>
+        const myLinkedList =  new LinkedList(2);
+
+
+        console.log(myLinkedList.print())
+
+        myLinkedList.insertHead(3);
+
+        console.log(myLinkedList.print())
+
+        myLinkedList.forEach(console.log)
+    </script>
+
+</body>
+</html>
