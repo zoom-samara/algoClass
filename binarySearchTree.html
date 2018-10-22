@@ -17,12 +17,18 @@
         myTree.insert(56);
         myTree.insert(41);
         myTree.insert(34);
+        myTree.insert(46);
 
+        console.log(myTree.contains(46));
+        console.log(myTree.contains(34));
+        console.log(myTree.contains(2));
 
-
-        console.log(myTree.contains(46))
-        console.log(myTree.contains(34))
-        console.log(myTree.contains(2))
+        console.log('traverseDepthFirst_inOrder')
+        myTree.traverseDepthFirst_inOrder(console.log);
+        console.log('traverseDepthFirst_preOrder')
+        myTree.traverseDepthFirst_preOrder(console.log);
+        console.log('traverseDepthFirst_postOrder')
+        myTree.traverseDepthFirst_postOrder(console.log);
 
     </script>
 

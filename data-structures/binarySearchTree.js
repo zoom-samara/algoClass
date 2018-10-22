@@ -91,19 +91,51 @@ BinarySearchTree.prototype.contains = function(value) {
 // Time complexity: O(n)
 
 BinarySearchTree.prototype.traverseDepthFirst_inOrder = function(fn) {
-  // implement me...
+  // Left, SELF, Right
+
+  if (!!this.left) {
+    this.left.traverseDepthFirst_inOrder(fn)
+  }
+
+  fn(this.value);
+
+  if (!!this.right) {
+    this.right.traverseDepthFirst_inOrder(fn)
+  }
+
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.traverseDepthFirst_preOrder = function(fn) {
-  // implement me...
+  // SELF, Left, Right
+
+  fn(this.value);
+
+  if (!!this.left) {
+    this.left.traverseDepthFirst_inOrder(fn)
+  }
+
+  if (!!this.right) {
+    this.right.traverseDepthFirst_inOrder(fn)
+  }
+
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.traverseDepthFirst_postOrder = function(fn) {
-  // implement me...
+  // Left, Right, SELF
+
+  if (!!this.left) {
+    this.left.traverseDepthFirst_inOrder(fn)
+  }
+
+  if (!!this.right) {
+    this.right.traverseDepthFirst_inOrder(fn)
+  }
+
+  fn(this.value);
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.checkIfFull = function() {
   // implement me...
