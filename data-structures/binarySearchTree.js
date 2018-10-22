@@ -51,21 +51,44 @@ A binary search tree was created by iterating over an array and inserting each e
 
 */
 
-function BinarySearchTree (value) {
+function BinarySearchTree(value) {
   this.value = value;
   this.left = null;
   this.right = null;
 }
 
 BinarySearchTree.prototype.insert = function(value) {
-  // implement me...
+  if (value < this.value) {
+    if (!!this.left) {
+      this.left.insert(value);
+    } else {
+      this.left = new BinarySearchTree(value);
+    }
+  } else if (value > this.value) {
+    if (!!this.right) {
+      this.right.insert(value);
+    } else {
+      this.right = new BinarySearchTree(value);
+    }
+  }
+
+  return this;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.contains = function(value) {
-  // implement me...
+  let contains = false;
+
+  if (!!this.left && value < this.value) {
+    return this.left.contains(value);
+  } else if (!!this.right && value > this.value) {
+    return this.right.contains(value);
+  } else if (value === this.value) {
+    contains = true;
+  }
+  return contains;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 BinarySearchTree.prototype.traverseDepthFirst_inOrder = function(fn) {
   // implement me...
@@ -81,7 +104,6 @@ BinarySearchTree.prototype.traverseDepthFirst_postOrder = function(fn) {
   // implement me...
 };
 // Time complexity:
-
 
 BinarySearchTree.prototype.checkIfFull = function() {
   // implement me...

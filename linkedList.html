@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>linked List</title>
+    <script src="./data-structures/linkedList.js"></script>
+</head>
+<body>
+    <h2>Linked List</h2>
+    <p>
+        <b>Added new List with Head 2:</b>
+        <script>
+          const myLinkedList =  new LinkedList(2);
+          document.write( myLinkedList.print());
+        </script>
+    </p>
+    <p>
+       <b>Inserted Head 3, 1, 23, 311:</b>
+        <script>
+          myLinkedList.insertHead(3);
+          myLinkedList.insertHead(1);
+          myLinkedList.insertHead(23);
+          myLinkedList.insertHead(311);
+          document.write(myLinkedList.print());
+        </script>
+    </p>
+    <p>
+        <b>Remove Head 311:</b>
+        <script>
+          myLinkedList.removeHead();
+          document.write(myLinkedList.print());
+        </script>
+    </p>
+    <p>
+        <b>Find one and insert after 2:</b>
+        <script>
+          const findOne = myLinkedList.findNode(1);
+          console.log('Insert After: ', myLinkedList.insertAfter(findOne, 2));
+          document.write(myLinkedList.print());
+        </script>
+    </p>
+    <p>
+        <b>Find one and remove after:</b>
+        <script>
+          myLinkedList.removeAfter(findOne);
+          document.write(myLinkedList.print());
+        </script>
+    </p>
+    <p>
+        <b>Add to Tail 100:</b>
+        <script>
+          myLinkedList.appendToTail(100);
+          document.write(myLinkedList.print());
+        </script>
+    </p>
+
+</body>
+</html>
