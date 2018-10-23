@@ -86,30 +86,50 @@ Given a directed graph and two nodes in the graph, write a function that indicat
 
 */
 
-
-function Graph () {
+function Graph() {
   this._nodes = {};
 }
 
 Graph.prototype.addNode = function(value) {
-  // implement me...
+  if (this._nodes[value]) return this._nodes;
+
+  this._nodes[value] = [];
+
+  return this._nodes;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Graph.prototype.removeNode = function(value) {
-  // implement me...
+  const removedItem = this._nodes[value];
+
+  if (!removedItem) return false;
+
+  for (let key in removedItem) {
+    delete removedItem[key][value];
+  }
+
+  delete this._nodes[value];
+
+  return removedItem;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 Graph.prototype.contains = function(value) {
-  // implement me...
+  return !!this._nodes[value];
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Graph.prototype.addEdge = function(value1, value2) {
-  // implement me...
+  const node1 = this._nodes[value1];
+  const node2 = this._nodes[value2];
+  if (!node1 || !node2) return false;
+
+  node1[value2] = node2;
+  node2[value1] = node1;
+
+  return this._nodes;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Graph.prototype.removeEdge = function(value1, value2) {
   // implement me...
