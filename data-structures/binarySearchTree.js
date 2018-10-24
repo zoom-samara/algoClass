@@ -147,11 +147,11 @@ BinarySearchTree.prototype.checkIfFull = function() {
 BinarySearchTree.prototype.checkIfBalanced = function() {
   const heights = [];
 
-  var calcDeep = function (node, height) {
+  var calcDeep = function(node, height) {
     if (!node.left && !node.right) return heights.push(height);
 
-    if (!!node.left) calcDeep(node.left, height+1);
-    if (!!node.right) calcDeep(node.right, height+1);
+    if (!!node.left) calcDeep(node.left, height + 1);
+    if (!!node.right) calcDeep(node.right, height + 1);
   };
 
   calcDeep(this, 1);
@@ -159,5 +159,20 @@ BinarySearchTree.prototype.checkIfBalanced = function() {
   var max = Math.max(...heights);
 
   return max - min <= 1;
+};
+// Time complexity: O(n)
+
+BinarySearchTree.prototype.removeNode = function(removeNode) {
+  const removedNode = (value, node) => {
+    if (value === node.value) return node;
+
+    if (!!node.left && value < node.value) return removedNode(value, node.left);
+    if (!!node.right && value > node.value)
+      return removedNode(value, node.right);
+  };
+
+  const current = removedNode(removeNode, this);
+
+  return current;
 };
 // Time complexity: O(n)
