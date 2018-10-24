@@ -11,12 +11,21 @@
 <body>
     <h1>Binary search</h1>
 
-<script>
-    const myArr = [100, 43, 12, 453, 221, 65, 2, 432];
-    const found = binarySearchInteractive(myArr, 221);
+    <script>
+        const myArr = [0, 10, 54, 69, 70, 90, 221, 532, 740];
+        document.write(`Array: ${myArr.join(', ')}, Key: 221`);
+    </script>
+        <br>
+    <script>
+        const foundInteractive = binarySearchInteractive(myArr, 221);
+        const foundRecursive = binarySearchRecursive(myArr, 740);
 
-    document.write(`Array: ${myArr.join(', ')}, Key: 221, Position: ${found}`);
+        document.write(`Array Interactive Position: ${foundInteractive}`);
+    </script>
+    <br>
+    <script>
 
-</script>
+      document.write(`Array Recursion Position: ${foundRecursive}`);
+    </script>
 </body>
 </html>

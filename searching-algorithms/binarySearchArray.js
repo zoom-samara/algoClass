@@ -34,3 +34,19 @@ function binarySearchInteractive(list, item) {
 
   return -1;
 }
+
+function binarySearchRecursive(list, item) {
+  if (list.length <= 1) return -1;
+
+  let pivot = Math.floor(list.length / 2);
+
+  const leftPart = list.slice(0, pivot);
+  const rightPart = list.slice(pivot);
+
+  if (item === list[pivot]) return pivot;
+  if (item > list[pivot]) {
+    const result = binarySearchRecursive(rightPart, item);
+    return result > 0 ? pivot + result : result;
+  }
+  if (item < list[pivot]) return binarySearchRecursive(leftPart, item);
+}
