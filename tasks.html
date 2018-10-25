@@ -8,6 +8,7 @@
 
     <script src="tasks/coins.js"></script>
     <script src="tasks/max-font.js"></script>
+    <script src="tasks/tracker-hell.js"></script>
     <title>Tasks</title>
 </head>
 <body>
@@ -30,7 +31,37 @@
       console.log(result)
     </script>
 
+    <script>
+      // Users list
+      const User1 = { type: 'user', login: 'mike', tasks: [], spectating: [] };
+      const User2 = { type: 'user', login: 'joseph', tasks: [], spectating: [] };
+      const User3 = { type: 'user', login: 'arnold', tasks: [], spectating: [] };
+
+      // Tasks list
+      const Task1 = { type: 'task', title: 'Make cool button', assignee: null, spectators: [], subtasks: [], parent: null };
+      const Task2 = { type: 'task', title: 'Fix bug in IE', assignee: null, spectators: [], subtasks: [], parent: null };
+      const Task3 = { type: 'task', title: 'E-mail formatting', assignee: null, spectators: [], subtasks: [], parent: null };
+
+      // Make links between users and tasks:
 
 
+      Task1.assignee = User1;
+      Task3.assignee = User1;
+      User1.tasks.push(Task1);
+
+      Task2.spectators.push(User1);
+      Task1.spectators.push(User2);
+
+      User1.spectating.push(Task2);
+      User2.spectating.push(Task1);
+      User3.spectating.push(Task1);
+      // Make subtasks:
+      Task3.parent = Task2;
+      Task2.subtasks.push(Task3);
+
+      const restoreDocument = trackerHell(Task3);
+
+      console.log(restoreDocument)
+    </script>
 </body>
 </html>
