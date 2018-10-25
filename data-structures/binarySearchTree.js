@@ -163,16 +163,119 @@ BinarySearchTree.prototype.checkIfBalanced = function() {
 // Time complexity: O(n)
 
 BinarySearchTree.prototype.removeNode = function(removeNode) {
-  const removedNode = (value, node) => {
-    if (value === node.value) return node;
+  let parent = null,
+    current = null;
 
-    if (!!node.left && value < node.value) return removedNode(value, node.left);
-    if (!!node.right && value > node.value)
-      return removedNode(value, node.right);
+  const findNode = (value, node) => {
+    if (value === node.value) {
+      current = node;
+      return true;
+    }
+
+    parent = node;
+    if (!!node.left && value < node.value) return findNode(value, node.left);
+    if (!!node.right && value > node.value) return findNode(value, node.right);
+
+    return false;
   };
 
-  const current = removedNode(removeNode, this);
+  const found = findNode(removeNode, this);
 
-  return current;
+  if (found) {
+    let replacement, replacementParent;
+    const childCount = (!!current.left ? 1 : 0) + (!!current.right ? 1 : 0);
+
+    if (current === this) {
+      switch (childCount) {
+        case 0:
+          this.value = null;
+          this.left = null;
+          this.right = null;
+          break;
+
+        case 1:
+          replacement = !!this.left ? this.left : this.right;
+          this.value = replacement;
+          this.left = replacement.left;
+          this.right = replacement.right;
+          break;
+
+        case 2:
+          replacementParent = null;
+          replacement = this.left; // left < root ==> root as new left
+
+          while (!!replacement.right) {
+            replacementParent = replacement;
+            replacement = replacement.right;
+          }
+
+          if (!!replacementParent) {
+            replacementParent.right = replacement.left;
+
+            replacement.right = this.right;
+            replacement.left = this.left;
+          } else {
+            replacement.right = this.right;
+          }
+
+          this.value = replacement.value;
+          this.left = replacement.left;
+          this.right = replacement.right;
+      }
+    } else {
+      switch (childCount) {
+        case 0:
+          if (current.value < parent.value) {
+            // Deletes itself as child  element
+            parent.left = null;
+          } else {
+            parent.right = null;
+          }
+          break;
+
+        case 1:
+          //       55
+          //    50    null
+          // 45   null
+          // current = 50
+          // parent = 55
+          if (current.value < parent.value) {
+            parent.left = !!current.left ? current.left : current.right;
+          //       55
+          //  null    60
+          //        61  null
+          // current = 60
+          // parent = 55
+          } else {
+            parent.right = !!current.left ? current.left : current.right;
+          }
+          break;
+
+        case 2:
+          replacementParent = current;
+          replacement = current.left;
+
+          while (!!replacement.right) {
+            replacementParent = replacement;
+            replacement = replacement.right;
+          }
+
+          replacementParent.right = replacement.left;
+
+          replacement.right = current.right;
+          replacement.left = current.left;
+
+          if (current.value < parent.value) {
+            parent.left = replacement;
+          } else {
+            parent.right = replacement;
+          }
+      }
+    }
+  } else {
+    return null;
+  }
+
+  // Oh, it was too complexity!
 };
-// Time complexity: O(n)
+// Time complexity: O(logN + logN)
