@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="tasks/coins.js"></script>
+    <title>Tasks</title>
+</head>
+<body>
+
+    <script>
+        const changeDollars = makeChange([1, 5, 10, 25], 50);
+        console.log(changeDollars.length);
+        const changeMoney = makeChange([1, 6, 10], 12);
+        console.log(changeMoney.length);
+
+        const changeMoneyGreedy = makeChangeGreedy([1, 2, 10], 12);
+
+        console.log(changeMoneyGreedy)
+    </script>
+
+</body>
+</html>
