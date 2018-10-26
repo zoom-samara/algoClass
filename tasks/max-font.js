@@ -1,33 +1,64 @@
-function calcFontMaxSize(container, text, min, max) {
-  const clone = container.cloneNode();
-  let fontSize,
-    minFS = 0,
-    maxFS = max;
+/***
+ * @param container {Node} ссылка на DOM-node, в которую нужно вписать строку ‘str‘
+ * @param str {string} строка, которую необходимо вписать. Максимальная длина равняется 100 символам
+ * @param min {number} минимальный размер шрифта (целое число, min >= 1)
+ * @param max {number} максимальный размер шрифта (целое число, max >= min >= 1)
+ * @return {number | null} искомый размер шрифта (целое число) или null, если текст вписать нельзя
+ */
 
-  clone.innerHTML = text;
-  clone.removeAttribute("style");
-  clone.style.minHeight = container.style.height;
-  clone.style.minWidth = container.style.width;
-  clone.style.float = "left";
+function calcFontSize(container, str, min, max) {
+  str = (str + "").substr(0, 100);
+  min = parseInt(min);
+  max = parseInt(max);
 
-  document.body.appendChild(clone);
+  if (min >= 1 && min <= max) {
+    let fontSize,
+      minFS = 0,
+      maxFS = max;
 
-  let iteration = 0;
-  while (minFS <= maxFS && iteration < 100) {
-    fontSize = Math.floor((minFS + maxFS) / 2);
+    let clone = document.createElement("div");
+    clone.style.width = "100%";
+    clone.style.height = "100%";
+    container.appendChild(clone);
 
-    clone.style.fontSize = `${fontSize}px`;
+    const height = clone.offsetHeight;
+    const width = clone.offsetWidth;
 
-    if (clone.offsetWidth > container.offsetWidth) {
-      maxFS = fontSize - 1;
-    } else {
-      minFS = fontSize + 1;
+    clone.style.display = "inline-block";
+    clone.style.fontSize = `${min}px`;
+    clone.style.width = "auto";
+    clone.style.height = "auto";
+    clone.innerHTML = str;
+
+    while (minFS <= maxFS) {
+      let mid = Math.floor((minFS + maxFS) / 2);
+      clone.style.fontSize = `${mid}px`;
+
+      if (height > 0) {
+        if (
+          clone.offsetWidth <= width &&
+          clone.offsetHeight <= height
+        ){
+          minFS = mid + 1;
+        } else {
+          maxFS = mid - 1;
+        }
+      } else {
+        if (clone.offsetWidth >= width) {
+          maxFS = mid - 1;
+        } else {
+          minFS = mid + 1;
+        }
+      }
+
+      if (minFS > maxFS) {
+        fontSize = maxFS;
+      }
     }
 
-    iteration++;
+    clone.style.fontSize = `${fontSize}px`;
+    clone.remove();
+
+    return fontSize < min || fontSize > max ? null : fontSize;
   }
-
-  clone.remove();
-
-  return fontSize < min ? null : fontSize;
 }
