@@ -41,23 +41,41 @@
       const Task1 = { type: 'task', title: 'Make cool button', assignee: null, spectators: [], subtasks: [], parent: null };
       const Task2 = { type: 'task', title: 'Fix bug in IE', assignee: null, spectators: [], subtasks: [], parent: null };
       const Task3 = { type: 'task', title: 'E-mail formatting', assignee: null, spectators: [], subtasks: [], parent: null };
+      const Task4 = { type: 'task', title: 'Text fixing', assignee: null, spectators: [], subtasks: [], parent: null };
+      const Task5 = { type: 'task', title: 'Subtask for task2', assignee: null, spectators: [], subtasks: [], parent: null };
 
       // Make links between users and tasks:
 
 
       Task1.assignee = User1;
+      Task2.assignee = User1;
       Task3.assignee = User1;
+      Task4.assignee = User1;
+      Task5.assignee = User2;
+
       User1.tasks.push(Task1);
+      User1.tasks.push(Task3);
+      User1.tasks.push(Task2);
+      User1.tasks.push(Task4);
+      User2.tasks.push(Task5);
 
       Task2.spectators.push(User1);
       Task1.spectators.push(User2);
+      Task1.spectators.push(User3);
+      Task3.spectators.push(User3);
 
       User1.spectating.push(Task2);
       User2.spectating.push(Task1);
       User3.spectating.push(Task1);
+      User3.spectating.push(Task3);
+
       // Make subtasks:
+      Task5.parent = Task2;
       Task3.parent = Task2;
+      Task4.parent = Task3;
       Task2.subtasks.push(Task3);
+      Task2.subtasks.push(Task5);
+      Task3.subtasks.push(Task4);
 
       const restoreDocument = trackerHell(Task3);
 

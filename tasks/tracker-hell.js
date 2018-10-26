@@ -1,9 +1,18 @@
-function trackerHell(backup) {
+function trackerHell(data) {
+  if (!data) return "";
+
   const tasks = [];
   const users = [];
 
-  let tasksString = "## Tasks";
-  let usersString = "## Users";
+  let tasksString = "## Задачи\n";
+  let usersString = "## Пользователи\n";
+
+  const sortTasksByAlphabet = function(a, b) {
+    return a.title > b.title ? 1 : -1;
+  };
+  const sortUsersByAlphabet = function(a, b) {
+    return a.login > b.login ? 1 : -1;
+  };
 
   const findAllTasks = function(task) {
     const found = tasks.find(t => {
@@ -43,40 +52,49 @@ function trackerHell(backup) {
     }
   };
 
-  if (backup.type === "task") {
-    findAllTasks(backup);
+  const writingTasks = function(tasksList, indent) {
+    tasksList.sort(sortTasksByAlphabet).forEach(task => {
+      tasksString += `\n${indent}- ${task.title}`;
+
+      if (task.assignee) {
+        tasksString += `, делает ${task.assignee.login}`;
+      }
+      if (task.spectators.length > 0) {
+        tasksString += ", наблюдают: ";
+        task.spectators.sort(sortUsersByAlphabet).forEach((user, idx) => {
+          tasksString += `${user.login}`;
+
+          if (idx !== task.spectators.length - 1) {
+            tasksString += ", ";
+          }
+        });
+      }
+      if (task.subtasks.length > 0) {
+        writingTasks(task.subtasks, indent + "  ");
+      }
+    });
+  };
+
+  const writingUsers = function(usersList) {
+    usersList.sort(sortUsersByAlphabet).forEach(user => {
+      usersString += `\n- ${user.login}`;
+
+      if (user.tasks.length > 0) {
+        user.tasks.sort(sortTasksByAlphabet).forEach(task => {
+          usersString += `\n  * ${task.title}`;
+        });
+      }
+    });
+  };
+
+  if (data.type === "task") {
+    findAllTasks(data);
   } else {
-    findAllUsers(backup);
+    findAllUsers(data);
   }
 
-  tasks.sort((a, b) => (a.title > b.title ? 1 : -1)).forEach(task => {
-    tasksString += `\n- ${task.title}`;
-
-    if (task.assignee) {
-      tasksString += `, do ${task.assignee.login}`;
-    }
-    if (task.spectators.length > 0) {
-      tasksString += ", checking";
-      task.spectators.forEach(user => {
-        tasksString += ` ${user.login}`;
-      });
-    }
-    if (task.subtasks.length > 0) {
-      task.subtasks.forEach(subtask => {
-        tasksString += `\n  * ${subtask.title}`;
-      });
-    }
-  });
-
-  users.sort((a, b) => (a.login > b.login ? 1 : -1)).forEach(user => {
-    usersString += `\n- ${user.login}`;
-
-    if (user.tasks.length > 0) {
-      user.tasks.forEach(task => {
-        usersString += `\n  - ${task.title}`;
-      });
-    }
-  });
+  writingTasks(tasks, "");
+  writingUsers(users);
 
   return `${tasksString}\n\n${usersString}`;
 }
