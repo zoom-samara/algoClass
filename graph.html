@@ -21,8 +21,16 @@
 
         myGraph.addEdge('Samara', 'Moscow');
         myGraph.addEdge('Samara', 'Magadan');
+        myGraph.addEdge('Kazan', 'Sochi');
         console.log(myGraph.contains('Samara'));
-        console.log(myGraph.removeNode('Magadan'));
+        console.log('Has Edge between Samara and Magadan: ', myGraph.hasEdge('Samara', 'Magadan'));
+        console.log('Remove Magadan: ', myGraph.removeNode('Magadan'));
+        console.log('Has Edge between Samara and Magadan: ', myGraph.hasEdge('Samara', 'Magadan'));
+        console.log('Has Edge between Samara and Moscow: ', myGraph.hasEdge('Samara', 'Moscow'));
+        console.log('Remove Edge between Samara and Moscow: ', myGraph.removeEdge('Samara', 'Moscow'));
+        console.log('Has Edge between Samara and Moscow: ', myGraph.hasEdge('Samara', 'Moscow'));
+        // myGraph.forEach(console.log);
+        // console.log(myGraph._nodes)
     </script>
 
 </body>

@@ -132,19 +132,22 @@ Graph.prototype.addEdge = function(value1, value2) {
 // Time complexity: O(1)
 
 Graph.prototype.removeEdge = function(value1, value2) {
-  // implement me...
+  delete this._nodes[value1][value2];
+  delete this._nodes[value2][value1];
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Graph.prototype.hasEdge = function(value1, value2) {
-  // implement me...
+  return this._nodes[value1].hasOwnProperty(value2) && this._nodes[value2].hasOwnProperty(value1)
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Graph.prototype.forEach = function(fn) {
-  // implement me...
+  for(let i in this._nodes) {
+    fn(this._nodes[i])
+  }
 };
-// Time complexity:
+// Time complexity: O(n)
 
 Graph.prototype.traverseDepthFirst = function(value, fn, visited, distance) {
   // implement me...
