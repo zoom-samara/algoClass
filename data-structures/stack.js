@@ -51,28 +51,84 @@ What's the time complexity?
  */
 
 function Stack(capacity) {
-  // implement me...
+  this.capacity = capacity || Infinity;
+  this.collection = {};
+  this._count = 0;
 }
 
 Stack.prototype.push = function(value) {
-  // implement me...
+  if (this._count >= this.capacity)
+    return "Max capacity already reached. Remove element before adding a new one.";
+
+  this.collection[this._count++] = value;
+
+  return this.collection;
 };
 // Time complexity:
 
 Stack.prototype.pop = function() {
-  // implement me...
+  if (this._count === 0) return 'This Stack is empty';
+
+  const last = this.collection[this._count-1];
+  delete this.collection[this._count-1];
+  this._count--;
+
+  return last;
 };
 // Time complexity:
 
 Stack.prototype.peek = function() {
-  // implement me...
+  return this.collection[this._count-1];
 };
 // Time complexity:
 
 Stack.prototype.count = function() {
-  // implement me...
+  return this._count;
 };
-// Time complexity:
+
+Stack.prototype.contains = function(value) {
+  let result = false;
+  for (let i in this.collection) {
+    if (this.collection[i] === value) {
+      result = true;
+      break;
+    }
+  }
+
+  return result;
+};
+
+Stack.prototype.until = function(value) {
+  let steps = 'Not found this value';
+
+  for (let i in this.collection) {
+    if (this.collection[i] === value) {
+      steps = this._count - i;
+      break;
+    }
+  }
+
+  return steps;
+};
+
+
+const myStack = new Stack(3);
+
+console.log(myStack.pop());
+console.log(myStack.push('Hello1'));
+console.log(myStack.push('Hello2'));
+console.log(myStack.push('Hello3'));
+console.log(myStack.peek());
+console.log(myStack.push('Hello4'));
+console.log(myStack.count());
+console.log(myStack.pop());
+console.log(myStack.count());
+console.log(myStack.contains('Hello4'));
+console.log(myStack.contains('Hello2'));
+console.log(myStack.until('Hello1'));
+console.log(myStack.until('Hello2'));
+console.log(myStack.push('Hello3'));
+console.log(myStack.until('Hello3'));
 
 
 /*
