@@ -44,34 +44,69 @@ queue values - (first)2-5-7-3-6-9(last)
 myQueue.until(7)
 => 3
 What's the time complexity?
-
-
-
-
- */
+*/
 
 function Queue(capacity) {
-  // implement me...
+  this.capacity = capacity || Infinity;
+  this.collection = {};
+  this._count = 0;
 }
 
 Queue.prototype.enqueue = function(value) {
-  // implement me...
+  if (this._count >= this.capacity)
+    return "Max capacity already reached. Remove element before adding a new one.";
+
+  this.collection[this._count++] = value;
+
+  return this.collection;
 };
-// Time complexity:
 
 Queue.prototype.dequeue = function() {
-  // implement me...
+  let first = this.collection[0];
+  delete this.collection[0];
+  this._count--;
+
+  for (let i in this.collection) {
+    this.collection[i - 1] = this.collection[i];
+    delete this.collection[i];
+  }
+
+  return first;
 };
-// Time complexity:
+
+Queue.prototype.contains = function(value) {
+  let result = false;
+  for (let i in this.collection) {
+    if (this.collection[i] === value) {
+      result = true;
+      break;
+    }
+  }
+
+  return result;
+};
 
 Queue.prototype.peek = function() {
-  // implement me...
+  return this.collection[this._count - 1];
 };
 
 Queue.prototype.count = function() {
-  // implement me...
+  return this._count;
 };
-// Time complexity:
+
+const myQueue = new Queue(3);
+
+console.log(myQueue.enqueue("Hello1"));
+console.log(myQueue.contains("Hello1"));
+console.log(myQueue.enqueue("Hello2"));
+console.log(myQueue.contains("Hello3"));
+console.log(myQueue.enqueue("Hello3"));
+console.log(myQueue.dequeue());
+console.log(myQueue.enqueue("Hello4"));
+console.log(myQueue.dequeue());
+console.log(myQueue);
+console.log(myQueue.count());
+console.log(myQueue.peek());
 
 
 
